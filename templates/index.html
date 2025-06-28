@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Story Idea Generator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f8ff;
+      padding: 30px;
+      text-align: center;
+    }
+    h1 {
+      color: #0077b6;
+    }
+    select, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .story {
+      background: white;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 700px;
+      text-align: left;
+    }
+    .prompt {
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎬 AI Story Idea Generator</h1>
+  <form method="POST">
+    <label for="genre">Choose a genre:</label>
+    <select name="genre" id="genre" required>
+      <option value="">--Select Genre--</option>
+      <option value="romcom" {% if genre == 'romcom' %}selected{% endif %}>Rom-Com</option>
+      <option value="horror" {% if genre == 'horror' %}selected{% endif %}>Horror</option>
+      <option value="thriller" {% if genre == 'thriller' %}selected{% endif %}>Thriller</option>
+      <option value="suspense" {% if genre == 'suspense' %}selected{% endif %}>Suspense</option>
+    </select>
+    <br>
+    <button type="submit">Generate</button>
+  </form>
+
+  {% if stories %}
+    <h2>Generated {{ genre.capitalize() }} Stories:</h2>
+    {% for story in stories %}
+      <div class="story">
+        <p class="prompt">Prompt: {{ story.prompt }}</p>
+        <p>Idea: {{ story.idea }}</p>
+      </div>
+    {% endfor %}
+  {% endif %}
+</body>
+</html>
+
